@@ -1,0 +1,14 @@
+<svg id="imagem-adicionar-notas" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Grupo_1" data-name="Grupo 1">
+    <rect id="Retângulo_4" data-name="Retângulo 4" width="24" height="24" fill="none"/>
+  </g>
+  <g id="Grupo_3" data-name="Grupo 3">
+    <g id="Grupo_2" data-name="Grupo 2">
+      <path id="Caminho_10" data-name="Caminho 10" d="M17,19.22H5V7h7V5H5A2.006,2.006,0,0,0,3,7V19a2.006,2.006,0,0,0,2,2H17a2.006,2.006,0,0,0,2-2V12H17Z" fill="green"/>
+      <path id="Caminho_11" data-name="Caminho 11" d="M19,2H17V5H14c.01.01,0,2,0,2h3V9.99c.01.01,2,0,2,0V7h3V5H19Z" fill="green"/>
+      <rect id="Retângulo_5" data-name="Retângulo 5" width="8" height="2" transform="translate(7 9)" fill="green"/>
+      <path id="Caminho_12" data-name="Caminho 12" d="M7,12v2h8V12H7Z" fill="green"/>
+      <rect id="Retângulo_6" data-name="Retângulo 6" width="8" height="2" transform="translate(7 15)" fill="green"/>
+    </g>
+  </g>
+</svg>
