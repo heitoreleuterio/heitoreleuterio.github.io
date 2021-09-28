@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco de dados alunos</title>
+    <link href="./style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="containerPrincipal">
+        <header>
+            <h1 id="tituloPrincipal" onselect="console.log('a')">OEMAR | CONTROLE DE ALUNOS</h1>
+            <nav>
+                <span class="navItem" onmouseenter="AlterarCorAoPassarMouseSobreElemento(this)"
+                    onmouseout="AlterarCorQuandoMouseSairDoElemento(this)" onclick="IniciarCadastroAlunos()">Cadastrar
+                    Alunos</span>
+            </nav>
+        </header>
+        <div id="areaCadastro" class="container">
+            <div id="divBtnPararEdicao">
+                <img src="./imagens/imagem-fechar-vermelha.svg" id="imagemFecharEdicaoHover" width=40px
+                    class="backgroundImgTableButton">
+                <img src="./imagens/imagem-fechar.svg" id="imagemFecharEdicaoPadrao" width=40px>
+
+            </div>
+            <h2 class="tituloSecundario" id="tituloAlunoEdicao">Heitor Eleutério de Rezende</h2>
+            <h2>Nome do Aluno</h2>
+            <input type="text" id="inputNomeAluno" class="formInput" oninput="AnalisarDadosCadastroAlunos()">
+            <h2>Data de Nascimento do Aluno</h2>
+            <input type="date" id="inputIdadeAluno" class="formInput" oninput="AnalisarDadosCadastroAlunos()">
+            <h2>Digite Série do Aluno</h2>
+            <input type="number" id="inputSerieAluno" class="formInput" oninput="AnalisarDadosCadastroAlunos()">
+            <br>
+            <input type="button" id="inputFinalizarCadastro"
+                class="formInput inputFinalizarCadastro animatedOpacityHover" onclick="AdicionarAluno()"
+                onmouseenter="AlterarCorAoPassarMouseSobreElemento(this)"
+                onmouseout="AlterarCorQuandoMouseSairDoElemento(this)" value="Adicionar Aluno">
+
+        </div>
+
+        <div class="container" id="areaCadastroNotas" style="display: none;">
+            <h2 id="tituloAlunoAtualCadastroNota" class="tituloSecundario"></h2>
+            <h2>
+                Matéria:
+            </h2>
+            <select id="selectMateriaNota" class="formInput selectTrimestreNota"
+                oninput="AtualizarTabelaNotasAlunoAtual()">
+                <option value="biologia">Biologia</option>
+                <option value="quimica">Química</option>
+                <option value="fisico">Físico</option>
+            </select>
+            <h2>
+                Trimestre:
+            </h2>
+            <select id="selectTrimestreNota" class="formInput selectTrimestreNota">
+                <option value="NotasPrimeiroTrimestre">Primeiro Trimestre</option>
+                <option value="NotasSegundoTrimestre">Segundo Trimestre</option>
+                <option value="NotasTerceiroTrimestre">Terceiro Trimestre</option>
+            </select>
+            <h2>
+                Nota:
+            </h2>
+            <input type="number" class="formInput" id="inputNota" oninput="AnalisarDadosCadastroNotas()" max="10">
+            <br>
+            <input type="button" id="inputFinalizarCadastroNotas" onclick="AdicionarNota()"
+                class="formInput inputFinalizarCadastro animatedOpacityHover"
+                onmouseenter="AlterarCorAoPassarMouseSobreElemento(this)"
+                onmouseout="AlterarCorQuandoMouseSairDoElemento(this)" value="Adicionar Nota">
+
+            <div id="areaVisualizacaoNotasAluno">
+                <table id="tabelaNotas" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <th>
+                            <div class="itemTabela itemTabelaSemBordaDireita">
+                                Primeiro Trimestre
+                            </div>
+                        </th>
+                        <th>
+                            <div class="itemTabela itemTabelaSemBordaDireita">
+                                Segundo Trimestre
+                            </div>
+                        </th>
+                        <th>
+                            <div class="itemTabela">
+                                Terceiro Trimestre
+                            </div>
+                        </th>
+                    </tr>
+                </table>
+                <div id="divCanvasNotas">
+                    <canvas id="canvasNotas" width="1100px" height="650px"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div id="areaVisualizacaoTurma" class="container">
+
+            <table id="tabelaAlunos" cellspacing="0" cellpadding="0">
+                <tr>
+                    <th>
+                        <div class="itemTabela itemTabelaSemBordaDireita">
+                            Nome
+                        </div>
+                    </th>
+                    <th>
+                        <div class="itemTabela itemTabelaSemBordaDireita">
+                            Idade
+                        </div>
+                    </th>
+                    <th>
+                        <div class="itemTabela">
+                            Série
+                        </div>
+                    </th>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+    <script src="./script.js"></script>
+
+</body>
+
+</html>

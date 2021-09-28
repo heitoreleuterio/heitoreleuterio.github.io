@@ -1,11 +1,14 @@
+"use strict";
 class Materia {
-    constructor(nome, isObrigatoria) {
+    constructor(nome, isObrigatoria = false) {
         this.Nome = nome;
         this.IsObrigatoria = isObrigatoria;
         this.NotasPrimeiroTrimestre = new Array();
         this.NotasSegundoTrimestre = new Array();
         this.NotasTerceiroTrimestre = new Array();
-        this.GetNotasLength = function () { return Math.max(this.NotasPrimeiroTrimestre.length, this.NotasSegundoTrimestre.length, this.NotasTerceiroTrimestre.length) };
+    }
+    GetNotasLength() {
+        return Math.max(this.NotasPrimeiroTrimestre.length, this.NotasSegundoTrimestre.length, this.NotasTerceiroTrimestre.length);
     }
     CalcularMediaPrimeiroTrimestre() {
         if (this.NotasPrimeiroTrimestre.length > 0)
@@ -86,7 +89,9 @@ this.addEventListener("resize", () => {
     canvas.width = (this.outerWidth / 100) * 57.29166666666667;
     canvas.height = (this.outerHeight / 100) * 60, 18518518518519;
     ConstruirLinhasIniciaisGraficoComparacaoNotas();
-    timeout = setTimeout(() => { GerarGraficosComparaçõesNotas() }, 300);
+    if (escola.AlunoCadastrandoNotas != null)
+        timeout = setTimeout(() => { GerarGraficosComparaçõesNotas() }, 300);
+    VerificarPosicaoCentralTabela();
 });
 const tituloPrincipal = document.getElementById("tituloPrincipal");
 const tituloAlunoEdicao = document.getElementById("tituloAlunoEdicao");
@@ -174,7 +179,8 @@ function AtualizarTabelaAlunos() {
         adicionarNotaBtnDiv.className = "tableFloatItem";
         adicionarNotaBtnImg1.src = "./imagens/imagem-adicionar-notas.svg";
         adicionarNotaBtnImg2.src = "./imagens/imagem-adicionar-notas-vermelho.svg";
-        adicionarNotaBtnImg2.className = "backgroundImgTableButton";
+        adicionarNotaBtnImg2.className = "backgroundImgTableButton floatItemImg";
+        adicionarNotaBtnImg1.className = "floatItemImg";
         adicionarNotaBtnDiv.appendChild(adicionarNotaBtnImg2);
         adicionarNotaBtnDiv.appendChild(adicionarNotaBtnImg1);
 
@@ -182,14 +188,16 @@ function AtualizarTabelaAlunos() {
         removeBtnDiv.className = "tableFloatItem";
         removeBtnImg1.src = "./imagens/imagem-lixeira.svg";
         removeBtnImg2.src = "./imagens/imagem-lixeira-vermelha.svg";
-        removeBtnImg2.className = "backgroundImgTableButton";
+        removeBtnImg2.className = "backgroundImgTableButton floatItemImg";
+        removeBtnImg1.className = "floatItemImg";
         removeBtnDiv.appendChild(removeBtnImg2);
         removeBtnDiv.appendChild(removeBtnImg1);
         removeBtn.appendChild(removeBtnDiv);
         editarAlunoBtnDiv.className = "tableFloatItem";
         editarAlunoBtnImg1.src = "./imagens/imagem-editar.svg";
         editarAlunoBtnImg2.src = "./imagens/imagem-editar-vermelha.svg";
-        editarAlunoBtnImg2.className = "backgroundImgTableButton";
+        editarAlunoBtnImg2.className = "backgroundImgTableButton floatItemImg";
+        editarAlunoBtnImg1.className = "floatItemImg";
         editarAlunoBtnDiv.appendChild(editarAlunoBtnImg2);
         editarAlunoBtnDiv.appendChild(editarAlunoBtnImg1);
         editarAlunoBtn.appendChild(editarAlunoBtnDiv);
@@ -217,8 +225,8 @@ function AtualizarTabelaAlunos() {
         removeBtn.addEventListener("click", () => {
             const resultado = confirm(`Você realmente deseja remover o aluno: ${escola.Alunos[c].Nome}`);
             if (resultado) {
-                escola.Alunos.splice(c, 1);
-                AtualizarTabelaAlunos();
+                RemoverAluno();
+                VerificarPosicaoCentralTabela();
             }
 
         });
@@ -327,8 +335,10 @@ if (alunosJSON != null) {
     });
 }
 function VerificarPosicaoCentralTabela() {
-    if (escola.Alunos.length > 0)
+    if (escola.Alunos.length > 0 && outerWidth > 704)
         tabelaAlunos.style.transform = "translate(60px)";
+    else
+        tabelaAlunos.style.transform = "";
 }
 VerificarPosicaoCentralTabela();
 
@@ -377,13 +387,16 @@ function AdicionarAluno() {
             FinalizarEdicaoAluno();
             AtualizarTabelaAlunos();
         }
+        VerificarPosicaoCentralTabela();
     }
     else
         alert("Os campos não estão devidamente prenchidos");
 }
 
-
-
+function RemoverAluno(aluno) {
+    escola.Alunos.splice(escola.Alunos.indexOf(aluno), 1);
+    AtualizarTabelaAlunos();
+}
 
 function AdicionarNota() {
     if (escola.AlunoCadastrandoNotas != null && AnalisarDadosCadastroNotas()) {
@@ -392,7 +405,7 @@ function AdicionarNota() {
         const nota = parseFloat(caixaNota.value);
         let materia = escola.AlunoCadastrandoNotas.Materias.filter(materia => materia.Nome == nomeMateria)[0];
         if (materia == undefined) {
-            materia = new Materia(nomeMateria, false);
+            materia = new Materia(nomeMateria);
             escola.AlunoCadastrandoNotas.Materias.push(materia);
         }
         materia[trimestre].push(nota);
@@ -400,9 +413,7 @@ function AdicionarNota() {
         AtualizarTabelaNotas(materia);
         ConstruirLinhasIniciaisGraficoComparacaoNotas();
         const funcao = function () {
-            var position = canvas.getBoundingClientRect();
-
-            // checking whether fully visible
+            const position = canvas.getBoundingClientRect();
             if (position.top >= 0 && position.bottom <= window.innerHeight) {
                 GerarGraficosComparaçõesNotas();
                 window.removeEventListener("scroll", funcao);
@@ -410,7 +421,8 @@ function AdicionarNota() {
 
         };
         window.addEventListener('scroll', funcao);
-        VerificarPosicaoCentralTabela();
+        caixaNota.focus();
+
 
     }
     else

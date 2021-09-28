@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOGO DA MEMORIA</title>
+    <link href="./style.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="infoContainer">
+        <h1 id="actualLevelTitle">Actual Level: 1</h1>
+        <h1 id="attemptsTitle">Maximum number of attempts: 0 / Infinity</h1>
+    </div>
+    <input type="button" value="Restart Level" class="endLevelButton" id="restartLevelButtonMainScreen"
+        onclick="RestartLevel()">
+    <div style="display: flex;justify-content: center;">
+        <div id="mainContainer" >
+            <div id="container">
+            </div>
+            <div id="behindContainerInfo">
+                <h1 id="levelInfo" class="animatedInfo">Level 1:</h1>
+                <h1 id="levelInfoComplement" class="animatedInfo">COMPLETED</h1>
+                <h2 id="timeInfo">
+                    Time: 00:00:00
+                </h2>
+                <h2 id="attemptsInfo" class="animatedInfo">
+                    Number of Attempts: 35 / Infinity
+                </h2>
+                <input type="button" value="Next Level" class="endLevelButton animatedInfo" id="endLevelButton2" 
+                onclick="LoadNextLevel()">
+            </div>
+        </div>
+    </div>
+    <div  id="finishGameScreen">
+        <h1 id="winTitle">Congratulations! You finished the game:</h1>
+        <input type="button" value="Restart Game" class="endLevelButton" id="restartGameButton" onclick="RestartGame()">
+    </div>
+
+    <script src="./game.js"></script>
+    <script src="./screen.js"></script>
+</body>
+
+</html>
