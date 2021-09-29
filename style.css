@@ -25,15 +25,28 @@ body{
     text-shadow: 4px 4px  black;
     
 }
+#mainTitle::selection{
+    background-color: transparent;
+}
 #strong1{
     color: #ad4848;
+}
+#strong1::selection{
+    color: #cccccc;
 }
 #strong2{
     color: #baba43;
 }
+#strong2::selection{
+    color: silver;
+}
 #strong3{
     color: #49b243;
 }
+#strong3::selection{
+    color:rgb(165, 165, 165) ;
+}
+
 
 #mainContainer{
     display: flex;

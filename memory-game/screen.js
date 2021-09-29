@@ -1,3 +1,4 @@
+"use strict";
 const container = document.getElementById("container");
 const mainContainer = document.getElementById("mainContainer");
 const victoryScreen = document.getElementById("finishGameScreen");
@@ -68,19 +69,15 @@ function Play(viewCard) {
                         }
                         UpdateAttemptCounter();
                         if (game.VerifyVictory()) {
-                            ShowEndLevelScreen(true);
                             if (game.VerifyEndGame()) {
-
-                                
-                                victoryScreen.style.visibility = "visible";
-                                victoryScreen.style.opacity = 1;
+                                ShowEndGameScreen();
                             }
+                            else
+                                ShowEndLevelScreen(true);
                         }
-                        else if (game.VerifyDefeat()){
-                            /*loseLevelScreen.style.display = "flex"*/
+                        else if (game.VerifyDefeat()) 
                             ShowEndLevelScreen(false);
-                        }
-
+                            
                         viewCard.removeEventListener("transitionend", verifyFunction);
                         duringPlay = false;
                     };
@@ -97,6 +94,17 @@ function Play(viewCard) {
 
 }
 
+function ShowEndGameScreen() {
+    victoryScreen.style.visibility = "visible";
+    victoryScreen.style.opacity = "1";
+}
+
+function HideEndGameScreen() {
+    victoryScreen.style.opacity = "0";
+    const func = () => { victoryScreen.style.visibility = "hidden";victoryScreen.removeEventListener("transitionend",func)};
+    victoryScreen.addEventListener("transitionend",func);
+}
+
 function ShowEndLevelScreen(isWin) {
     timeInfo.style.opacity = "0";
     infoContainer.style.opacity = "0";
@@ -107,13 +115,13 @@ function ShowEndLevelScreen(isWin) {
     attemptsInfo.style.left = "900px";
     mainContainer.className = "flip";
     levelInfo.innerText = `Level ${game.LevelCount + 1}`;
-    if(isWin){
+    if (isWin) {
         levelInfoComplement.innerText = "COMPLETED";
         levelInfoComplement.style.color = "#24c912";
         endLevelButton.onclick = LoadNextLevel;
         endLevelButton.value = "Next Level";
     }
-    else{
+    else {
         levelInfoComplement.innerText = "FAIL";
         levelInfoComplement.style.color = "#c61133";
         endLevelButton.onclick = RestartLevel;
@@ -134,6 +142,7 @@ function ShowEndLevelScreen(isWin) {
 }
 
 function HideLevelScreen() {
+    timeInfo.style.opacity = "0";
     infoContainer.style.opacity = "1";
     restartLevelButton.style.opacity = "1";
     mainContainer.className = "";
@@ -158,8 +167,7 @@ function RestartGame() {
     UpdateLevelTitle();
     container.innerHTML = "";
     GenerateViewCards();
-    victoryScreen.style.visibility = "hidden";
-    victoryScreen.style.opacity = "0";
+    HideEndGameScreen();
     AtualizarGrid();
 }
 
@@ -187,12 +195,10 @@ function AtualizarGrid() {
     let columns = "";
     let rows = "";
     const levelAtual = game.GetActualLevel();
-    for (let c = 0; c < levelAtual.Row; c++) {
+    for (let c = 0; c < levelAtual.Row; c++) 
         rows += "auto ";
-    }
-    for (let c = 0; c < levelAtual.Column; c++) {
+    for (let c = 0; c < levelAtual.Column; c++) 
         columns += "auto ";
-    }
     container.style.gridTemplateColumns = columns;
     container.style.gridTemplateRows = rows;
 }

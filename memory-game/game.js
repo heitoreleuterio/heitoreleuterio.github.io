@@ -1,3 +1,4 @@
+"use strict";
 class Level {
     constructor(column, row, cardsList, maxMoviments, matchNumber = 2) {
         this.Column = column;
