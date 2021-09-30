@@ -1,11 +1,12 @@
 "use strict";
 class Level {
-    constructor(column, row, cardsList, maxMoviments, matchNumber = 2) {
+    constructor(column, row, cardsList, maxMoviments, matchNumber = 2,levelMessage = null) {
         this.Column = column;
         this.Row = row;
         this.CardsList = cardsList;
         this.MaxMoviments = maxMoviments;
         this.MatchNumber = matchNumber;
+        this.LevelMessage = levelMessage;
     }
 }
 
@@ -69,7 +70,7 @@ const levels = [
     new Level(4, 5, cardsList1, 30),
     new Level(6, 5, cardsList2, 60),
     new Level(8, 5, cardsList3, 85),
-    new Level(9, 5, cardsList4, 100, 3)
+    new Level(9, 5, cardsList4, 100, 3,"In this level you should make triplets of cards instead of pairs")
 ];
 
 class Game {

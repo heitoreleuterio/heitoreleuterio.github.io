@@ -14,14 +14,35 @@
 </head>
 
 <body>
-    <div id="mainTitleContainer">
-        <h1 id="mainTitle"><strong id="strong1">Heitor</strong> <strong id="strong2">Eleutério</strong><strong
-                id="strong3"> de Rezende</strong></h1>
+    <div style="display: flex;justify-content: center;">
+        <div id="mainTitleContainer">
+            <h1 id="mainTitle"><strong id="strong1">Heitor</strong> <strong id="strong2">Eleutério</strong><strong
+                    id="strong3"> de Rezende</strong></h1>
+        </div>
     </div>
     <div id="mainContainer">
         <a class="mainButton" href="./memory-game/index.html">Memory Game</a>
-        <a class="mainButton" href="./escola/index.html">School Management</a>
+        <a class="mainButton" href="./school/index.html">School Management</a>
     </div>
+    <script>
+        const mainTitle = document.getElementById("mainTitle");
+        const tituloPalavra1 = document.getElementById("strong1");
+        const tituloPalavra2 = document.getElementById("strong2");
+        const tituloPalavra3 = document.getElementById("strong3");
+
+        tituloPalavra1.addEventListener("mouseenter", () => {
+            mainTitle.style.transform = "skewX(9deg)";
+        });
+        tituloPalavra2.addEventListener("mouseenter", () => {
+            mainTitle.style.transform = "skewY(0.9deg)";
+        });
+        tituloPalavra3.addEventListener("mouseenter", () => {
+            mainTitle.style.transform = "skewX(-9deg)";
+        });
+        mainTitle.addEventListener("mouseleave", () => {
+            mainTitle.style.transform = "";
+        });
+    </script>
 </body>
 
 </html>

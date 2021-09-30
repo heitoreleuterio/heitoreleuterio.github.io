@@ -21,7 +21,7 @@
     <input type="button" value="Restart Level" class="endLevelButton" id="restartLevelButtonMainScreen"
         onclick="RestartLevel()">
     <div style="display: flex;justify-content: center;">
-        <div id="mainContainer" >
+        <div id="mainContainer">
             <div id="container">
             </div>
             <div id="behindContainerInfo">
@@ -33,12 +33,17 @@
                 <h2 id="attemptsInfo" class="animatedInfo">
                     Number of Attempts: 35 / Infinity
                 </h2>
-                <input type="button" value="Next Level" class="endLevelButton animatedInfo" id="endLevelButton2" 
-                onclick="LoadNextLevel()">
+                <input type="button" value="Next Level" class="endLevelButton animatedInfo" id="endLevelButton2"
+                    onclick="LoadNextLevel()">
             </div>
         </div>
     </div>
-    <div  id="finishGameScreen">
+    <div id="warningScreen" class="gameMessageScreen">
+        <h1 id="warningTitle">Warning</h1>
+        <div id="warningMessage"></div>
+        <input type="button" value="Continue" class="endLevelButton" id="warningButton" onclick="HideWarningScreen()">
+    </div>
+    <div id="finishGameScreen" class="gameMessageScreen">
         <h1 id="winTitle">Congratulations! You finished the game:</h1>
         <input type="button" value="Restart Game" class="endLevelButton" id="restartGameButton" onclick="RestartGame()">
     </div>

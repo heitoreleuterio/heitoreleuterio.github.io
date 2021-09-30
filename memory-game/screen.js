@@ -13,9 +13,14 @@ const attemptsInfo = document.getElementById("attemptsInfo");
 const endLevelButton = document.getElementById("endLevelButton2");
 const restartLevelButton = document.getElementById("restartLevelButtonMainScreen");
 const infoContainer = document.getElementById("infoContainer");
+const warningScreen = document.getElementById("warningScreen");
+const warningMessage = document.getElementById("warningMessage");
+const warningButton = document.getElementById("warningButton");
+const restartGameButton = document.getElementById("restartGameButton");
 let duringPlay = false;
 
-
+warningButton.addEventListener("transitionend", (e) => { e.stopPropagation() });
+restartGameButton.addEventListener("transitionend", (e) => { e.stopPropagation() });
 
 GenerateViewCards();
 function GenerateViewCards() {
@@ -75,9 +80,9 @@ function Play(viewCard) {
                             else
                                 ShowEndLevelScreen(true);
                         }
-                        else if (game.VerifyDefeat()) 
+                        else if (game.VerifyDefeat())
                             ShowEndLevelScreen(false);
-                            
+
                         viewCard.removeEventListener("transitionend", verifyFunction);
                         duringPlay = false;
                     };
@@ -94,16 +99,7 @@ function Play(viewCard) {
 
 }
 
-function ShowEndGameScreen() {
-    victoryScreen.style.visibility = "visible";
-    victoryScreen.style.opacity = "1";
-}
 
-function HideEndGameScreen() {
-    victoryScreen.style.opacity = "0";
-    const func = () => { victoryScreen.style.visibility = "hidden";victoryScreen.removeEventListener("transitionend",func)};
-    victoryScreen.addEventListener("transitionend",func);
-}
 
 function ShowEndLevelScreen(isWin) {
     timeInfo.style.opacity = "0";
@@ -189,15 +185,19 @@ function LoadNextLevel() {
     container.innerHTML = "";
     GenerateViewCards();
     AtualizarGrid();
+    const actualLevel = game.GetActualLevel();
+    if (actualLevel.LevelMessage != null) {
+        setTimeout(ShowWarningScreen(actualLevel.LevelMessage),450);
+    }
 }
 
 function AtualizarGrid() {
     let columns = "";
     let rows = "";
     const levelAtual = game.GetActualLevel();
-    for (let c = 0; c < levelAtual.Row; c++) 
+    for (let c = 0; c < levelAtual.Row; c++)
         rows += "auto ";
-    for (let c = 0; c < levelAtual.Column; c++) 
+    for (let c = 0; c < levelAtual.Column; c++)
         columns += "auto ";
     container.style.gridTemplateColumns = columns;
     container.style.gridTemplateRows = rows;
@@ -210,5 +210,29 @@ function TransformCardInViewcard(card) {
 
 function TransformViewCardInCard(viewCard) {
     return new Card(viewCard.id, viewCard.dataset.content);
+}
+
+function ShowEndGameScreen() {
+    victoryScreen.style.visibility = "visible";
+    victoryScreen.style.opacity = "1";
+}
+
+function HideEndGameScreen() {
+    victoryScreen.style.opacity = "0";
+    const func = () => { victoryScreen.style.visibility = "hidden"; victoryScreen.removeEventListener("transitionend", func) };
+    victoryScreen.addEventListener("transitionend", func);
+}
+
+
+function ShowWarningScreen(message) {
+    warningMessage.innerHTML = `<p>${message}</p>`;
+    warningScreen.style.visibility = "visible";
+    warningScreen.style.opacity = "1";
+}
+
+function HideWarningScreen() {
+    warningScreen.style.opacity = "0";
+    const func = (event) => { event.stopPropagation(); warningScreen.style.visibility = "hidden"; warningScreen.removeEventListener("transitionend", func) };
+    warningScreen.addEventListener("transitionend", func);
 }
 
