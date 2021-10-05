@@ -5,7 +5,6 @@ const victoryScreen = document.getElementById("finishGameScreen");
 const attempsCounter = document.getElementById("attemptsTitle");
 const levelTitle = document.getElementById("actualLevelTitle");
 const winTitle = document.getElementById("winTitle");
-const winBtn = document.getElementById("restartGameButton");
 const levelInfo = document.getElementById("levelInfo");
 const levelInfoComplement = document.getElementById("levelInfoComplement");
 const timeInfo = document.getElementById("timeInfo");
