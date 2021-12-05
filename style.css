@@ -71,7 +71,6 @@ body{
     border:2px solid black;
     padding: 30px;
     border-radius: 10px;
-    
 }
 
 .mainButton{
@@ -118,7 +117,7 @@ body{
 
 @media screen and (max-width:890px) {
     #mainTitle{
-        font-size: 6vmin
+        font-size: 6vmin;
     }
 }
 

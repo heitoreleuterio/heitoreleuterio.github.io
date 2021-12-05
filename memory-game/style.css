@@ -12,7 +12,7 @@ body{
 
     margin: 0px;
     padding: 0px;
-    
+    overflow: hidden;
     
 }
 
@@ -120,10 +120,10 @@ body{
     transform: rotateY(180deg);
 }
 .cardContentBack{
-    
     background-color: #00A2FF;
     color: black;
-    font-size: 30px;
+    /* font-size: 30px; */
+    font-size: 3vmin;
 }
 
 
