@@ -1,0 +1,319 @@
+body {
+    background-color: #b09687;
+    overflow: hidden;
+    padding: 0px;
+    margin: 0px;
+}
+
+#mapa-cerrado {
+    width: 90vw;
+    height: 90vh;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    top: 0;
+    transition-property: opacity, top, width, height;
+    transition-duration: 0.8s, 1s, 1s, 1s;
+}
+
+@keyframes zoomMapa {
+    0% {
+        scale: 1;
+    }
+
+    100% {
+        scale: 14;
+    }
+}
+
+#aviso-principal {
+    font-family: 'Comfortaa', cursive;
+    font-size: 40px;
+    z-index: 1;
+    color: #6d5a50;
+    user-select: none;
+    transition-property: opacity;
+    transition-duration: 1s;
+    opacity: 0;
+}
+
+#titulo-principal {
+    font-family: 'Poor Story', cursive;
+    font-size: 9.375vw;
+    z-index: 1;
+    color: #6d5a50;
+    user-select: none;
+}
+
+#div-mapa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#span-titulo-principal {
+    overflow: hidden;
+    animation-name: mostrarTitulo;
+    animation-duration: 2.5s;
+    animation-timing-function: steps(40, end);
+    text-align: center;
+    transition-property: left;
+    transition-duration: 2s;
+    transition-timing-function: cubic-bezier(.46, -0.6, 0, 1.7);
+    left: 0;
+    position: relative;
+}
+
+.botao-principal {
+    font-size: 2.6vw;
+    padding-left: 2.6vw;
+    padding-right: 2.6vw;
+    padding-top: 1.85vh;
+    padding-bottom: 1.85vh;
+    border-radius: 5px;
+    border-width: 0px;
+    background-color: #6b564a;
+    font-family: cursive;
+    color: #bfa597;
+    transition-property: background-color, color, opacity;
+    transition-duration: 0.25s, 0.25s, 0.7s;
+    transition-timing-function: ease-in;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.botao-principal:hover {
+    background-color: #bfa597;
+    color: #6b564a;
+}
+
+.botao-principal:active {
+    transition-duration: 0.05s, 0.05s;
+    background-color: #aa6d4c;
+    color: #dd956e;
+}
+
+.item-mapa {
+    transition-property: scale;
+    transition-duration: 0.4s;
+    transition-delay: 0.2s;
+    cursor: pointer;
+}
+
+#titulo-pergunta {
+    font-family: 'Comfortaa', cursive;
+    font-size: 3.125vw;
+    z-index: 1;
+    color: #1e1e1e;
+    user-select: none;
+    transition-property: opacity;
+    transition-duration: 1s;
+    text-align: center;
+    visibility: hidden;
+    opacity: 0;
+}
+
+#imagem-pergunta {
+    transition-property: opacity, scale, left, top, right, bottom;
+    transition-duration: 1s, 0.4s, 2s, 2s, 2s, 2s;
+    z-index: 3;
+    position: absolute;
+    display: none;
+    opacity: 0;
+    left: 0px;
+    top: 0px;
+}
+
+#container-area-resposta {
+    display: none;
+}
+
+#container-respostas {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    gap: 0.5vw;
+    justify-content: center;
+    align-content: center;
+    width: 70vw;
+    margin: auto;
+    height: 72vh;
+    visibility: hidden;
+    transition-property: opacity;
+    transition-duration: 1s;
+    opacity: 0;
+    position: relative;
+    bottom: 35px;
+}
+
+.resposta-button {
+    width: 36.45vw;
+    height: 31vh;
+    font-size: 2.08vw;
+    background-color: #753b1c;
+    color: #cca48e;
+    border-width: 0px;
+    font-family: 'Comfortaa', cursive;
+    border-radius: 20px;
+    padding-right: 2.6vw;
+    padding-left: 2.6vw;
+    transition-property: background-color, color, opacity;
+    transition-duration: 0.25s, 0.25s, 0.7s;
+    transition-timing-function: ease-in;
+    cursor: pointer;
+}
+
+.resposta-button:hover {
+    background-color: #cca48e;
+    color: #753b1c;
+}
+
+.resposta-correta-button {
+    transition-property: background-color, color, opacity;
+    transition-duration: 1s, 1s, 0.7s;
+    background-color: #6bd675;
+    color: #195b1a;
+}
+
+.resposta-errada-button {
+    transition-property: background-color, color, opacity;
+    transition-duration: 1s, 1s, 0.7s;
+    background-color: #d36969;
+    color: #591818;
+}
+
+#div-pergunta-temperatura {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    transition-property: opacity;
+    transition-duration: 1.5s;
+}
+
+.containers-info-temperatura {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -7vh;
+
+}
+
+.titulo-info-temperatura {
+    font-family: 'Comfortaa', cursive;
+    font-size: 2.08vw;
+    user-select: none;
+    color: #1e1e1e;
+    position: relative;
+    right: 4.68vw;
+    transition-property: opacity;
+    transition-duration: 0.8s;
+    transition-delay: 0.3s;
+    opacity: 0;
+}
+
+#neve {
+    position: relative;
+    right: 14vw;
+    scale: 0.9;
+    transition-property: opacity;
+    transition-duration: 0.8s;
+    opacity: 0;
+}
+
+#sol {
+    position: relative;
+    right: 12.8vw;
+    scale: 0.9;
+    transition-property: opacity;
+    transition-duration: 0.8s;
+    opacity: 0;
+}
+
+#container-sol {
+    position: relative;
+    top: 7vh;
+}
+
+#termometro {
+    scale: 0.7;
+    transition-property: opacity;
+    transition-duration: 0.8s;
+    opacity: 0;
+}
+
+.imagem-resposta {
+    width: 35.41vw;
+    height: 31.48vh;
+    border-radius: 10px;
+    transition-property: opacity, border-color;
+    transition-duration: 0.8s, 0.8s;
+    cursor: pointer;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent;
+}
+
+.imagem-resposta:hover {
+    opacity: 0.65;
+}
+
+.imagem-resposta:active {
+    transition-duration: 0.2s;
+    opacity: 0.9;
+}
+
+.imagem-resposta-correta {
+    border-color: #6bd675;
+}
+
+.imagem-resposta-errada {
+    border-color: #d36969;
+}
+
+#div-resultado {
+    justify-content: center;
+    align-items: center;
+    display: none;
+    flex-direction: column;
+    height: 90vh;
+}
+
+#titulo-resultado {
+    font-family: 'Poor Story', cursive;
+    font-size: 5.81vw;
+    z-index: 1;
+    user-select: none;
+    transition-property: opacity;
+    transition-duration: 0.8s;
+    opacity: 0;
+    color: #6d5a50;
+}
+
+@keyframes mostrarTitulo {
+    0% {
+        width: 0px;
+        transform: skew(40deg);
+    }
+
+    100% {
+        transform: skew(0deg);
+        width: 545px;
+    }
+
+}
+
+@media screen and (max-height: 768px) {
+    #container-sol {
+        top: 6.7vh;
+    }
+
+    .containers-info-temperatura {
+        margin-top: -8.3vh;
+
+    }
+}
